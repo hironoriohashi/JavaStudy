@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -73,5 +74,21 @@ class JudgeWinnerTest {
     boardSurface.put(9, "");
 
     assertThat(judgeWinner.judgeWinnerFunction(boardSurface), is("続行"));
+  }
+
+  @Test
+  public void 三目並べで〇とＸと空文字以外の値が入っていた場合() {
+    Map<Integer, String> boardSurface = new HashMap<>();
+    boardSurface.put(1, "〇");
+    boardSurface.put(2, "×");
+    boardSurface.put(3, "×");
+    boardSurface.put(4, "×");
+    boardSurface.put(5, "〇");
+    boardSurface.put(6, "〇");
+    boardSurface.put(7, "×");
+    boardSurface.put(8, "〇");
+    boardSurface.put(9, "△");
+
+    assertThrows(IllegalArgumentException.class, () -> judgeWinner.judgeWinnerFunction(boardSurface));
   }
 }
