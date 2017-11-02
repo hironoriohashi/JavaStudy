@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 class JudgeWinnerTest {
-  static JudgeWinner judgeWinner = new JudgeWinner();
+  private JudgeWinner judgeWinner = new JudgeWinner();
 
   @Test
   public void Ｘが三目揃っていた場合にＸが勝利している文字列が返ってくること() {
