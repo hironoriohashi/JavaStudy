@@ -31,4 +31,8 @@ public class TicTacToeBoard {
   public String getCellData(int line, int column) {
     return board[line - 1][column - 1];
   }
+
+  public int getTurnCount() {
+    return turnCount;
+  }
 }
