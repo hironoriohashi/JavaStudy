@@ -10,85 +10,90 @@ import java.util.HashMap;
 import java.util.Map;
 
 class JudgeWinnerTest {
-  private TicTacToeReferee judgeWinner = new JudgeWinner();
+  private TicTacToeReferee ticTacToeReferee = new TicTacToeReferee();
 
   @Test
-  public void Ｘが三目揃っていた場合にＸが勝利している文字列が返ってくること() {
+  public void 斜めで三目揃っていた場合に勝負がつくこと() {
     TicTacToeBoard boardSurface = new TicTacToeBoard();
-    boardSurface.put(1, "×");
-    boardSurface.put(2, "〇");
-    boardSurface.put(3, "×");
-    boardSurface.put(4, "〇");
-    boardSurface.put(5, "×");
-    boardSurface.put(6, "〇");
-    boardSurface.put(7, "×");
-    boardSurface.put(8, "");
-    boardSurface.put(9, "");
+    boardSurface.setCellData(1, 1, "〇");
+    boardSurface.setCellData(1, 2, "〇");
+    boardSurface.setCellData(1, 3, "×");
+    //boardSurface.setCellData(2, 1, "");
+    boardSurface.setCellData(2, 2, "×");
+    //boardSurface.setCellData(2, 3, "");
+    boardSurface.setCellData(3, 1, "×");
+    //boardSurface.setCellData(3, 2, "");
+    //boardSurface.setCellData(3, 3, "");
 
-    assertThat(judgeWinner.judgeWinnerFunction(boardSurface), is("×の勝ち"));
+    TicTacToeResult result = ticTacToeReferee.judgeWinner(boardSurface);
+    assertTrue(result.isCrossWin());
   }
 
   @Test
-  public void 〇が三目揃っていた場合に〇が勝利している文字列が返ってくること() {
-    Map<Integer, String> boardSurface = new HashMap<>();
-    boardSurface.put(1, "×");
-    boardSurface.put(2, "〇");
-    boardSurface.put(3, "×");
-    boardSurface.put(4, "×");
-    boardSurface.put(5, "〇");
-    boardSurface.put(6, "");
-    boardSurface.put(7, "");
-    boardSurface.put(8, "〇");
-    boardSurface.put(9, "");
+  public void 横で三目揃っていた場合に勝負がつくこと() {
+    TicTacToeBoard boardSurface = new TicTacToeBoard();
+    boardSurface.setCellData(1, 1, "×");
+    boardSurface.setCellData(1, 2, "〇");
+    boardSurface.setCellData(1, 3, "×");
+    boardSurface.setCellData(2, 1, "×");
+    boardSurface.setCellData(2, 2, "〇");
+    //boardSurface.setCellData(2, 3, "");
+    //boardSurface.setCellData(3, 1, "");
+    boardSurface.setCellData(3, 2, "〇");
+    //boardSurface.setCellData(3, 3, "");
 
-    assertThat(judgeWinner.judgeWinnerFunction(boardSurface), is("〇の勝ち"));
+    TicTacToeResult result = ticTacToeReferee.judgeWinner(boardSurface);
+    assertTrue(result.isCircleWin());
   }
 
   @Test
-  public void どちらも勝利しておらず盤面に空きが無かった場合に引き分けの文字列が返ってくること() {
-    Map<Integer, String> boardSurface = new HashMap<>();
-    boardSurface.put(1, "〇");
-    boardSurface.put(2, "×");
-    boardSurface.put(3, "×");
-    boardSurface.put(4, "×");
-    boardSurface.put(5, "〇");
-    boardSurface.put(6, "〇");
-    boardSurface.put(7, "×");
-    boardSurface.put(8, "〇");
-    boardSurface.put(9, "×");
+  public void 縦で三目揃っていた場合に勝負がつくこと() {
+    TicTacToeBoard boardSurface = new TicTacToeBoard();
+    boardSurface.setCellData(1, 1, "〇");
+    boardSurface.setCellData(1, 2, "〇");
+    boardSurface.setCellData(1, 3, "〇");
+    boardSurface.setCellData(2, 1, "×");
+    boardSurface.setCellData(2, 2, "×");
+    //boardSurface.setCellData(2, 3, "");
+    //boardSurface.setCellData(3, 1, "");
+    //boardSurface.setCellData(3, 2, "");
+    //boardSurface.setCellData(3, 3, "");
 
-    assertThat(judgeWinner.judgeWinnerFunction(boardSurface), is("引き分け"));
+    TicTacToeResult result = ticTacToeReferee.judgeWinner(boardSurface);
+    assertTrue(result.isCircleWin());
   }
 
   @Test
-  public void どちらも勝利しておらず盤面に空きがあった場合に続行の文字列が返ってくること() {
-    Map<Integer, String> boardSurface = new HashMap<>();
-    boardSurface.put(1, "〇");
-    boardSurface.put(2, "×");
-    boardSurface.put(3, "×");
-    boardSurface.put(4, "×");
-    boardSurface.put(5, "〇");
-    boardSurface.put(6, "〇");
-    boardSurface.put(7, "×");
-    boardSurface.put(8, "〇");
-    boardSurface.put(9, "");
+  public void どちらも勝利しておらず盤面に空きが無かった場合に引き分けが分かること() {
+    TicTacToeBoard boardSurface = new TicTacToeBoard();
+    boardSurface.setCellData(1, 1, "〇");
+    boardSurface.setCellData(1, 2, "×");
+    boardSurface.setCellData(1, 3, "×");
+    boardSurface.setCellData(2, 1, "×");
+    boardSurface.setCellData(2, 2, "〇");
+    boardSurface.setCellData(2, 3, "〇");
+    boardSurface.setCellData(3, 1, "×");
+    boardSurface.setCellData(3, 2, "〇");
+    boardSurface.setCellData(3, 3, "×");
 
-    assertThat(judgeWinner.judgeWinnerFunction(boardSurface), is("続行"));
+    TicTacToeResult result = ticTacToeReferee.judgeWinner(boardSurface);
+    assertTrue(result.isDraw());
   }
 
   @Test
-  public void 三目並べで〇とＸと空文字以外の値が入っていた場合() {
-    Map<Integer, String> boardSurface = new HashMap<>();
-    boardSurface.put(1, "〇");
-    boardSurface.put(2, "×");
-    boardSurface.put(3, "×");
-    boardSurface.put(4, "×");
-    boardSurface.put(5, "〇");
-    boardSurface.put(6, "〇");
-    boardSurface.put(7, "×");
-    boardSurface.put(8, "〇");
-    boardSurface.put(9, "△");
+  public void どちらも勝利しておらず盤面に空きがあった場合に続行が分かること() {
+    TicTacToeBoard boardSurface = new TicTacToeBoard();
+    boardSurface.setCellData(1, 1, "〇");
+    boardSurface.setCellData(1, 2, "×");
+    boardSurface.setCellData(1, 3, "×");
+    boardSurface.setCellData(2, 1, "×");
+    boardSurface.setCellData(2, 2, "〇");
+    boardSurface.setCellData(2, 3, "〇");
+    boardSurface.setCellData(3, 1, "×");
+    boardSurface.setCellData(3, 2, "〇");
+    //boardSurface.setCellData(3, 3, "");
 
-    assertThrows(IllegalArgumentException.class, () -> judgeWinner.judgeWinnerFunction(boardSurface));
+    TicTacToeResult result = ticTacToeReferee.judgeWinner(boardSurface);
+    assertTrue(result.isContinued());
   }
 }
