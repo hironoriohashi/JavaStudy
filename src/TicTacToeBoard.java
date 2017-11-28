@@ -19,11 +19,9 @@ public class TicTacToeBoard {
       throw new IllegalStateException();
     } else if (line < 1 || line > lineSize || column < 1 || column > columnSize) {
       throw new IllegalArgumentException();
-    } else if (turnCount % 2 == 1 && !data.equals("×")) {
+    } else if (!data.equals("〇") && !data.equals("×")) {
       throw new IllegalArgumentException();
-    } else if (turnCount % 2 == 0 && !data.equals("〇")) {
-      throw new IllegalArgumentException();
-    } else if (board[line][column] != null && !board[line][column].isEmpty()) {
+    } else if (board[line - 1][column - 1] != null && !board[line - 1][column - 1].isEmpty()) {
       throw new IllegalArgumentException();
     }
     board[line - 1][column - 1] = data;
@@ -31,6 +29,6 @@ public class TicTacToeBoard {
   }
 
   public String getCellData(int line, int column) {
-    return board[line][column];
+    return board[line - 1][column - 1];
   }
 }
