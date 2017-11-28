@@ -10,11 +10,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 class JudgeWinnerTest {
-  private JudgeWinner judgeWinner = new JudgeWinner();
+  private TicTacToeReferee judgeWinner = new JudgeWinner();
 
   @Test
   public void Ｘが三目揃っていた場合にＸが勝利している文字列が返ってくること() {
-    Map<Integer, String> boardSurface = new HashMap<>();
+    TicTacToeBoard boardSurface = new TicTacToeBoard();
     boardSurface.put(1, "×");
     boardSurface.put(2, "〇");
     boardSurface.put(3, "×");
