@@ -18,12 +18,8 @@ class JudgeWinnerTest {
     boardSurface.setCellData(1, 1, "〇");
     boardSurface.setCellData(1, 2, "〇");
     boardSurface.setCellData(1, 3, "×");
-    //boardSurface.setCellData(2, 1, "");
     boardSurface.setCellData(2, 2, "×");
-    //boardSurface.setCellData(2, 3, "");
     boardSurface.setCellData(3, 1, "×");
-    //boardSurface.setCellData(3, 2, "");
-    //boardSurface.setCellData(3, 3, "");
 
     TicTacToeResult result = ticTacToeReferee.judgeWinner(boardSurface);
     assertTrue(result.isCrossWin());
@@ -37,10 +33,7 @@ class JudgeWinnerTest {
     boardSurface.setCellData(1, 3, "×");
     boardSurface.setCellData(2, 1, "×");
     boardSurface.setCellData(2, 2, "〇");
-    //boardSurface.setCellData(2, 3, "");
-    //boardSurface.setCellData(3, 1, "");
     boardSurface.setCellData(3, 2, "〇");
-    //boardSurface.setCellData(3, 3, "");
 
     TicTacToeResult result = ticTacToeReferee.judgeWinner(boardSurface);
     assertTrue(result.isCircleWin());
@@ -54,10 +47,6 @@ class JudgeWinnerTest {
     boardSurface.setCellData(1, 3, "〇");
     boardSurface.setCellData(2, 1, "×");
     boardSurface.setCellData(2, 2, "×");
-    //boardSurface.setCellData(2, 3, "");
-    //boardSurface.setCellData(3, 1, "");
-    //boardSurface.setCellData(3, 2, "");
-    //boardSurface.setCellData(3, 3, "");
 
     TicTacToeResult result = ticTacToeReferee.judgeWinner(boardSurface);
     assertTrue(result.isCircleWin());
@@ -91,7 +80,6 @@ class JudgeWinnerTest {
     boardSurface.setCellData(2, 3, "〇");
     boardSurface.setCellData(3, 1, "×");
     boardSurface.setCellData(3, 2, "〇");
-    //boardSurface.setCellData(3, 3, "");
 
     TicTacToeResult result = ticTacToeReferee.judgeWinner(boardSurface);
     assertTrue(result.isContinued());
