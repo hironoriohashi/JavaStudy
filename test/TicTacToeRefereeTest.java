@@ -1,5 +1,3 @@
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
@@ -16,19 +14,16 @@ class JudgeWinnerTest {
 
   @Test
   public void 先手が5手目で勝利条件を満たした場合に先手の勝利でゲームを終了すること() {
-    game.attack(1, 1);
-    assertTrue(game.getResult().isContinued());
+    assertTrue(game.inputPlayerAttack(1, 1).isContinued());
 
-    game.attack(2, 1);
-    assertTrue(game.getResult().isContinued());
+    assertTrue(game.inputPlayerAttack(2, 1).isContinued());
 
-    game.attack(1, 2);
-    assertTrue(game.getResult().isContinued());
+    assertTrue(game.inputPlayerAttack(1, 2).isContinued());
 
-    game.attack(2, 2);
-    assertTrue(game.getResult().isContinued());
+    assertTrue(game.inputPlayerAttack(2, 2).isContinued());
 
-    game.attack(1, 3);
-    assertTrue(game.getResult().isFirstPlayerWin());
+    Result result = game.inputPlayerAttack(1, 3);
+    assertFalse(result.isContinued());
+    assertTrue(result.isFirstPlayerWin());
   }
 }
