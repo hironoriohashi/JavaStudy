@@ -3,11 +3,22 @@ public class TicTacToe implements BoardGame {
   private TicTacToeBoard ticTacToeBoard;
   private int inputCount;
 
+  /**
+   * コンストラクタ.
+   * 縦と横の大きさが3のボードを用意し,
+   * 入力されたデータをカウントするフィールドを0にする
+   */
   TicTacToe() {
     ticTacToeBoard = new TicTacToeBoard(3, 3);
     inputCount = 0;
   }
 
+  /**
+   * 指定された行と列の交点にデータを入力できるかどうかの判断を行う
+   * @param line データを入力する行
+   * @param column データを入力する列
+   * @return データの入力ができるかどうか
+   */
   private boolean canInputData(int line, int column) {
     if (inputCount >= 9) {
       return false;
@@ -19,11 +30,10 @@ public class TicTacToe implements BoardGame {
     return true;
   }
 
-  private void inputCellData(int line, int column) {
-    ticTacToeBoard.setCellData(line - 1, column - 1, inputCount % 2 == 0 ? 1 : 2);
-    inputCount++;
-  }
-
+  /**
+   * 盤面の状態が勝利条件を満たしているか判断する
+   * @return true:勝利条件を満たしている false:勝利条件を満たしていない
+   */
   private boolean isSomeoneWin() {
     for (int i = 0; i < 3; i++) {
       if (ticTacToeBoard.getCellData(i, 0) != 0 && lineScanning(i, 0, 1)) {
@@ -43,6 +53,13 @@ public class TicTacToe implements BoardGame {
     return false;
   }
 
+  /**
+   * 行に同じ値が3つ連続してあるかを調べる
+   * @param line 行
+   * @param column 列
+   * @param matchCount 連続していた個数
+   * @return true:同じ値が3つ連続している false:同じ値が3つ連続していない
+   */
   private boolean lineScanning(int line, int column, int matchCount) {
     if (ticTacToeBoard.getCellData(line, column) == ticTacToeBoard.getCellData(line, column + 1)) {
       matchCount++;
@@ -51,6 +68,13 @@ public class TicTacToe implements BoardGame {
     return false;
   }
 
+  /**
+   * 列に同じ値が3つ連続してあるかを調べる
+   * @param line 行
+   * @param column 列
+   * @param matchCount 連続していた個数
+   * @return true:同じ値が3つ連続している false:同じ値が3つ連続していない
+   */
   private boolean columnScanning(int line, int column, int matchCount) {
     if (ticTacToeBoard.getCellData(line, column) == ticTacToeBoard.getCellData(line + 1, column)) {
       matchCount++;
@@ -59,6 +83,13 @@ public class TicTacToe implements BoardGame {
     return false;
   }
 
+  /**
+   * 右斜め下に同じ値が3つ連続してあるかを調べる
+   * @param line 行
+   * @param column 列
+   * @param matchCount 連続していた個数
+   * @return true:同じ値が3つ連続している false:同じ値が3つ連続していない
+   */
   private boolean lowerRightDiagonalScanning(int line, int column, int matchCount) {
     if (ticTacToeBoard.getCellData(line, column) == ticTacToeBoard.getCellData(line + 1, column + 1)) {
       matchCount++;
@@ -67,6 +98,13 @@ public class TicTacToe implements BoardGame {
     return false;
   }
 
+  /**
+   * 右斜め上に同じ値が3つ連続してあるかを調べる
+   * @param line 行
+   * @param column 列
+   * @param matchCount 連続していた個数
+   * @return true:同じ値が3つ連続している false:同じ値が3つ連続していない
+   */
   private boolean upperRightDiagonalScanning(int line, int column, int matchCount) {
     if (ticTacToeBoard.getCellData(line, column) == ticTacToeBoard.getCellData(line - 1, column + 1)) {
       matchCount++;
@@ -75,6 +113,23 @@ public class TicTacToe implements BoardGame {
     return false;
   }
 
+  /**
+   * ボードの指定した行と列の交点に値を入力する
+   * @param line 指定した行
+   * @param column 指定した列
+   */
+  private void inputCellData(int line, int column) {
+    ticTacToeBoard.setCellData(line - 1, column - 1, inputCount % 2 == 0 ? 1 : 2);
+    inputCount++;
+  }
+
+  /**
+   * 指定した行と列の交点に対する入力が適切かどうかを判断し、反映してその結果を返す
+   * @param line 指定した行
+   * @param column 指定した列
+   * @return 入力を反映した結果.
+   * ゲームの勝者とゲームの続行or終了の状態を返す
+   */
   @Override
   public Result inputPlayerAttack(int line, int column) {
     boolean someoneWin = isSomeoneWin();
