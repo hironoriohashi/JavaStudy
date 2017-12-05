@@ -1,3 +1,5 @@
+import java.util.List;
+import java.util.stream.Stream;
 
 public class TicTacToe implements BoardGame {
   private TicTacToeBoard ticTacToeBoard;
@@ -56,7 +58,7 @@ public class TicTacToe implements BoardGame {
    */
   private boolean isSomeoneWin() {
     for (int i = 0; i < ticTacToeBoard.getLineSize(); i++) {
-      if (ticTacToeBoard.getCellData(i, 0) != 0 && lineScanning(i, 0, 1)) {
+      if (ticTacToeBoard.getCellData(i, 0) != 0 && lineScanning(0)) {
         return true;
       }
     }
@@ -71,6 +73,14 @@ public class TicTacToe implements BoardGame {
       return true;
     }
     return false;
+  }
+
+  /**
+   * Streamを使って、行に同じ値が3つ連続してあるかを調べる
+   */
+  private boolean lineScanning(int line) {
+    Stream<List<Integer>> stream = Stream.of(ticTacToeBoard.getBoard()).forEach();
+    return stream.distinct().count() == 1;
   }
 
   /**

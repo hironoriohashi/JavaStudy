@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class TicTacToeBoard {
   private int lineSize;
   private int columnSize;
@@ -23,5 +26,9 @@ public class TicTacToeBoard {
 
   public int getCellData(int line, int column) {
     return board[line][column];
+  }
+
+  public int[][] getBoard() {
+    return board;
   }
 }
