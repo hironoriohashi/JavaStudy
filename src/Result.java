@@ -1,27 +1,27 @@
 public class Result {
-  private boolean Continued;
-  private boolean FirstPlayerWin;
-  private boolean SecondPlayerWin;
+  private boolean continued;
+  private boolean firstPlayerWin;
+  private boolean secondPlayerWin;
 
-  Result(boolean Continued, boolean FirstPlayerWin, boolean SecondPlayerWin) {
-    this.Continued = Continued;
-    this.FirstPlayerWin = FirstPlayerWin;
-    this.SecondPlayerWin = SecondPlayerWin;
+  Result(boolean continued, boolean firstPlayerWin, boolean secondPlayerWin) {
+    this.continued = continued;
+    this.firstPlayerWin = firstPlayerWin;
+    this.secondPlayerWin = secondPlayerWin;
   }
 
   public boolean isContinued() {
-    return Continued;
+    return continued;
   }
 
   public boolean isFirstPlayerWin() {
-    return FirstPlayerWin;
+    return firstPlayerWin;
   }
 
   public boolean isSecondPlayerWin() {
-    return SecondPlayerWin;
+    return secondPlayerWin;
   }
 
   public boolean isDraw() {
-    return !(Continued || FirstPlayerWin || SecondPlayerWin);
+    return !(continued || firstPlayerWin || secondPlayerWin);
   }
 }

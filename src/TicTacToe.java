@@ -8,9 +8,27 @@ public class TicTacToe implements BoardGame {
    * 縦と横の大きさが3のボードを用意し,
    * 入力されたデータをカウントするフィールドを0にする
    */
-  TicTacToe() {
+  public TicTacToe() {
     ticTacToeBoard = new TicTacToeBoard(3, 3);
     inputCount = 0;
+  }
+
+  /**
+   * 指定した行と列の交点に対する入力が適切かどうかを判断し、反映してその結果を返す
+   * @param line 指定した行
+   * @param column 指定した列
+   * @return 入力を反映した結果.
+   * ゲームの勝者とゲームの続行or終了の状態を返す
+   */
+  @Override
+  public Result inputPlayerAttack(int line, int column) {
+    boolean someoneWin = isSomeoneWin();
+    if (someoneWin || !canInputData(line, column)) {
+      throw new IllegalArgumentException();
+    }
+    inputCellData(line, column);
+    someoneWin = isSomeoneWin();
+    return new Result(!someoneWin && inputCount < 9, someoneWin && inputCount % 2 == 1, someoneWin && inputCount % 2 == 0);
   }
 
   /**
@@ -121,23 +139,5 @@ public class TicTacToe implements BoardGame {
   private void inputCellData(int line, int column) {
     ticTacToeBoard.setCellData(line - 1, column - 1, inputCount % 2 == 0 ? 1 : 2);
     inputCount++;
-  }
-
-  /**
-   * 指定した行と列の交点に対する入力が適切かどうかを判断し、反映してその結果を返す
-   * @param line 指定した行
-   * @param column 指定した列
-   * @return 入力を反映した結果.
-   * ゲームの勝者とゲームの続行or終了の状態を返す
-   */
-  @Override
-  public Result inputPlayerAttack(int line, int column) {
-    boolean someoneWin = isSomeoneWin();
-    if (someoneWin || !canInputData(line, column)) {
-      throw new IllegalArgumentException();
-    }
-    inputCellData(line, column);
-    someoneWin = isSomeoneWin();
-    return new Result(!someoneWin && inputCount < 9, someoneWin && inputCount % 2 == 1, someoneWin && inputCount % 2 == 0);
   }
 }

@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TicTacToeTest {
-  BoardGame game;
+  private BoardGame game;
 
   @BeforeEach
   public void setup() {
