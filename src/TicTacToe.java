@@ -28,7 +28,9 @@ public class TicTacToe implements BoardGame {
     }
     inputCellData(line, column);
     someoneWin = isSomeoneWin();
-    return new Result(!someoneWin && inputCount < 9, someoneWin && inputCount % 2 == 1, someoneWin && inputCount % 2 == 0);
+    return new Result(!someoneWin && inputCount < ticTacToeBoard.getLineSize() * ticTacToeBoard.getColumnSize()
+        , someoneWin && inputCount % 2 == 1
+        , someoneWin && inputCount % 2 == 0);
   }
 
   /**
@@ -38,7 +40,7 @@ public class TicTacToe implements BoardGame {
    * @return データの入力ができるかどうか
    */
   private boolean canInputData(int line, int column) {
-    if (inputCount >= 9) {
+    if (inputCount >= ticTacToeBoard.getLineSize() * ticTacToeBoard.getColumnSize()) {
       return false;
     } else if (line < 1 || line > ticTacToeBoard.getLineSize() || column < 1 || column > ticTacToeBoard.getColumnSize()) {
       return false;
@@ -53,12 +55,12 @@ public class TicTacToe implements BoardGame {
    * @return true:勝利条件を満たしている false:勝利条件を満たしていない
    */
   private boolean isSomeoneWin() {
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < ticTacToeBoard.getLineSize(); i++) {
       if (ticTacToeBoard.getCellData(i, 0) != 0 && lineScanning(i, 0, 1)) {
         return true;
       }
     }
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < ticTacToeBoard.getColumnSize(); i++) {
       if (ticTacToeBoard.getCellData(0, i) != 0 && columnScanning(0, i, 1)) {
         return true;
       }
