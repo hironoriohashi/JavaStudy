@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -57,11 +58,16 @@ public class TicTacToe implements BoardGame {
    * @return true:勝利条件を満たしている false:勝利条件を満たしていない
    */
   private boolean isSomeoneWin() {
+    if(lineScanning()) {
+
+    }
+    /*
     for (int i = 0; i < ticTacToeBoard.getLineSize(); i++) {
       if (ticTacToeBoard.getCellData(i, 0) != 0 && lineScanning(0)) {
         return true;
       }
     }
+    */
     for (int i = 0; i < ticTacToeBoard.getColumnSize(); i++) {
       if (ticTacToeBoard.getCellData(0, i) != 0 && columnScanning(0, i, 1)) {
         return true;
@@ -78,9 +84,9 @@ public class TicTacToe implements BoardGame {
   /**
    * Streamを使って、行に同じ値が3つ連続してあるかを調べる
    */
-  private boolean lineScanning(int line) {
-    Stream<List<Integer>> stream = Stream.of(ticTacToeBoard.getBoard()).forEach();
-    return stream.distinct().count() == 1;
+  private boolean lineScanning() {
+    Stream<List<Integer>> stream = Stream.of(ticTacToeBoard.getBoard()).forEach(board -> Arrays.asList(board));
+    return stream.filter(data -> !data.equals(0)).distinct().count() == 1;
   }
 
   /**
