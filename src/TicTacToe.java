@@ -58,9 +58,17 @@ public class TicTacToe implements BoardGame {
    * @return true:勝利条件を満たしている false:勝利条件を満たしていない
    */
   private boolean isSomeoneWin() {
-    if(lineScanning()) {
-
+    // 行に3つ連続して同じ値が入っているかを確認する
+    for (int line = 0; line < ticTacToeBoard.getLineSize(); line++) {
+      for (int column = 0; column < ticTacToeBoard.getColumnSize() - 2; column++) {
+       if(ticTacToeBoard.getCellData(line, column) != 0
+           && ticTacToeBoard.getCellData(line, column) == ticTacToeBoard.getCellData(line, column + 1)
+           && ticTacToeBoard.getCellData(line, column) == ticTacToeBoard.getCellData(line, column + 2)) {
+         return true; // TODO 勝者の判断も行う
+       }
+      }
     }
+
     /*
     for (int i = 0; i < ticTacToeBoard.getLineSize(); i++) {
       if (ticTacToeBoard.getCellData(i, 0) != 0 && lineScanning(0)) {
@@ -79,14 +87,6 @@ public class TicTacToe implements BoardGame {
       return true;
     }
     return false;
-  }
-
-  /**
-   * Streamを使って、行に同じ値が3つ連続してあるかを調べる
-   */
-  private boolean lineScanning() {
-    Stream<List<Integer>> stream = Stream.of(ticTacToeBoard.getBoard()).forEach(board -> Arrays.asList(board));
-    return stream.filter(data -> !data.equals(0)).distinct().count() == 1;
   }
 
   /**
