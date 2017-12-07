@@ -29,13 +29,16 @@ public class TicTacToe implements BoardGame {
     if (someoneWin || !canInputData(line, column)) {
       throw new IllegalArgumentException();
     }
+
     inputCellData(line, column);
-    someoneWin = isSomeoneWin();
+
+    someoneWin = Stream.of(ticTacToeBoard.getBoard())
+        .anyMatch(board -> Arrays.stream(board).allMatch(num -> num == 1));
+
     return new Result(!someoneWin && inputCount < ticTacToeBoard.getLineSize() * ticTacToeBoard.getColumnSize()
         , someoneWin && inputCount % 2 == 1
         , someoneWin && inputCount % 2 == 0);
   }
-
   /**
    * 指定された行と列の交点にデータを入力できるかどうかの判断を行う
    * @param line データを入力する行
