@@ -31,10 +31,10 @@ public class TicTacToe implements BoardGame {
     }
 
     inputCellData(line, column);
-
     // TODO 盤面の状態から勝者を取得できるように修正
+    boolean isInputFirstPlayer =  inputCount % 2 == 1;
     someoneWin = Stream.of(ticTacToeBoard.getBoard())
-        .anyMatch(board -> Arrays.stream(board).distinct().allMatch(num -> inputCount % 2 == 1 ? num == 1 : num == 2));
+        .anyMatch(board -> Arrays.stream(board).distinct().allMatch(num -> isInputFirstPlayer ? num == 1 : num == 2));
 
     return new Result(!someoneWin && inputCount < ticTacToeBoard.getLineSize() * ticTacToeBoard.getColumnSize()
         , someoneWin && inputCount % 2 == 1
