@@ -25,7 +25,8 @@ public class TicTacToe implements BoardGame {
    */
   @Override
   public Result inputPlayerAttack(int line, int column) {
-    boolean someoneWin = isSomeoneWin();
+    // TODO 勝敗を判断した結果を変数へ代入する
+    boolean someoneWin = false;
     if (someoneWin || !canInputData(line, column)) {
       throw new IllegalArgumentException();
     }
@@ -34,7 +35,10 @@ public class TicTacToe implements BoardGame {
     // TODO 盤面の状態から勝者を取得できるように修正
     int player = inputCount % 2 == 1 ? 1 : 2;
     someoneWin = Stream.of(ticTacToeBoard.getBoard())
-        .anyMatch(oneLine -> Arrays.stream(oneLine).distinct().allMatch(cell -> cell == player));
+        .anyMatch(oneLine -> Arrays.stream(oneLine).allMatch(cell -> cell == player));
+
+    // TODO 盤面の列から勝敗を判断する処理を追加
+    // TODO 盤面の斜線から勝敗を判断する処理を追加
 
     return new Result(!someoneWin && inputCount < ticTacToeBoard.getLineSize() * ticTacToeBoard.getColumnSize()
         , someoneWin && inputCount % 2 == 1
@@ -55,42 +59,6 @@ public class TicTacToe implements BoardGame {
       return false;
     }
     return true;
-  }
-
-  /**
-   * 盤面の状態が勝利条件を満たしているか判断する
-   * @return true:勝利条件を満たしている false:勝利条件を満たしていない
-   */
-  private boolean isSomeoneWin() {
-    // 行に3つ連続して同じ値が入っているかを確認する
-    for (int line = 0; line < ticTacToeBoard.getLineSize(); line++) {
-      for (int column = 0; column < ticTacToeBoard.getColumnSize() - 2; column++) {
-       if(ticTacToeBoard.getCellData(line, column) != 0
-           && ticTacToeBoard.getCellData(line, column) == ticTacToeBoard.getCellData(line, column + 1)
-           && ticTacToeBoard.getCellData(line, column) == ticTacToeBoard.getCellData(line, column + 2)) {
-         return true; // TODO 勝者の判断も行う
-       }
-      }
-    }
-
-    /*
-    for (int i = 0; i < ticTacToeBoard.getLineSize(); i++) {
-      if (ticTacToeBoard.getCellData(i, 0) != 0 && lineScanning(0)) {
-        return true;
-      }
-    }
-    */
-    for (int i = 0; i < ticTacToeBoard.getColumnSize(); i++) {
-      if (ticTacToeBoard.getCellData(0, i) != 0 && columnScanning(0, i, 1)) {
-        return true;
-      }
-    }
-    if (ticTacToeBoard.getCellData(0, 0) != 0 && lowerRightDiagonalScanning(0, 0, 1)) {
-      return true;
-    } else if (ticTacToeBoard.getCellData(2, 0) != 0 && upperRightDiagonalScanning(2, 0, 1)) {
-      return true;
-    }
-    return false;
   }
 
   /**
