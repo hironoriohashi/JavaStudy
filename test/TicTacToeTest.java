@@ -15,7 +15,7 @@ class TicTacToeTest {
   }
 
   @Test
-  public void 先手が5手目で勝利条件を満たした場合に先手の勝利でゲームを終了すること() {
+  public void 先手が5手目で行を揃えて勝利条件を満たした場合に先手の勝利でゲームを終了すること() {
     assertTrue(game.inputPlayerAttack(1, 1).isContinued());
     assertTrue(game.inputPlayerAttack(2, 1).isContinued());
     assertTrue(game.inputPlayerAttack(1, 2).isContinued());
@@ -26,17 +26,29 @@ class TicTacToeTest {
   }
 
   @Test
-  public void 後手が6手目で勝利条件を満たした場合に後手の勝利でゲームを終了すること() {
+  public void 後手が6手目で行を揃えて勝利条件を満たした場合に後手の勝利でゲームを終了すること() {
     assertTrue(game.inputPlayerAttack(1, 1).isContinued());
-    assertTrue(game.inputPlayerAttack(1, 2).isContinued());
-    assertTrue(game.inputPlayerAttack(1, 3).isContinued());
-    assertTrue(game.inputPlayerAttack(2, 2).isContinued());
     assertTrue(game.inputPlayerAttack(2, 1).isContinued());
-    Result result = game.inputPlayerAttack(3, 2);
+    assertTrue(game.inputPlayerAttack(1, 2).isContinued());
+    assertTrue(game.inputPlayerAttack(2, 2).isContinued());
+    assertTrue(game.inputPlayerAttack(3, 1).isContinued());
+    Result result = game.inputPlayerAttack(2, 3);
     assertFalse(result.isContinued());
     assertTrue(result.isSecondPlayerWin());
   }
 
+  @Test
+  public void 先手が5手目で列を揃えて勝利条件を満たした場合に先手の勝利でゲームを終了すること() {
+    assertTrue(game.inputPlayerAttack(1, 1).isContinued());
+    assertTrue(game.inputPlayerAttack(1, 2).isContinued());
+    assertTrue(game.inputPlayerAttack(2, 1).isContinued());
+    assertTrue(game.inputPlayerAttack(2, 2).isContinued());
+    Result result = game.inputPlayerAttack(3, 1);
+    assertFalse(result.isContinued());
+    assertTrue(result.isFirstPlayerWin());
+  }
+
+  /*
   @Test
   public void 先手が9手目で勝利条件を満たした場合に先手の勝利でゲームを終了すること() {
     assertTrue(game.inputPlayerAttack(1, 1).isContinued());
@@ -101,4 +113,5 @@ class TicTacToeTest {
       game.inputPlayerAttack(1, 1);
     });
   }
+  */
 }
