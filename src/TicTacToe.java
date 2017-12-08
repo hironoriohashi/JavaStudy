@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class TicTacToe implements BoardGame {
@@ -34,6 +35,24 @@ public class TicTacToe implements BoardGame {
     someoneWin = isSomeoneWin(ticTacToeBoard.getBoard(), player);
 
     // TODO 盤面の列から勝敗を判断する処理を追加
+    Stream.of(ticTacToeBoard.getBoard())
+        .map(line -> line[0])
+        .collect(Collectors.toList()); // 1列目だけ取得
+
+    Stream.of(ticTacToeBoard.getBoard())
+        .map(line -> line[1])
+        .collect(Collectors.toList()); // 2列目だけ取得
+
+    Stream.of(ticTacToeBoard.getBoard())
+        .map(line -> line[2])
+        .collect(Collectors.toList()); // 3列目だけ取得
+
+    Stream.of(ticTacToeBoard.getBoard()) // 取得した列を配列にまとめる
+        .map(line -> Stream.of(line).map(row -> row[0]).collect(Collectors.toList())
+            , Stream.of(line).map(row -> row[1]).collect(Collectors.toList())
+            , Stream.of(line).map(row -> row[2]).collect(Collectors.toList()))
+        .collect(Collectors.toList());
+
     // TODO 盤面の斜線から勝敗を判断する処理を追加
 
     return new Result(!someoneWin && inputCount < ticTacToeBoard.getLineSize() * ticTacToeBoard.getColumnSize()
