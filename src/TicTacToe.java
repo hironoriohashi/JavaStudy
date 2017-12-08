@@ -31,7 +31,7 @@ public class TicTacToe implements BoardGame {
     boolean someoneWin;
     // TODO 盤面の状態から勝者を取得できるように修正
     int player = inputCount % 2 == 1 ? 1 : 2;
-    someoneWin = isSomeoneWin(player);
+    someoneWin = isSomeoneWin(ticTacToeBoard.getBoard(), player);
 
     // TODO 盤面の列から勝敗を判断する処理を追加
     // TODO 盤面の斜線から勝敗を判断する処理を追加
@@ -41,8 +41,8 @@ public class TicTacToe implements BoardGame {
         , someoneWin && inputCount % 2 == 0);
   }
 
-  private boolean isSomeoneWin(int player) {
-    return Stream.of(ticTacToeBoard.getBoard())
+  private boolean isSomeoneWin(int[][] board, int player) {
+    return Stream.of(board)
         .anyMatch(line -> Arrays.stream(line).allMatch(cell -> cell == player));
   }
 
