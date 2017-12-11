@@ -34,24 +34,14 @@ public class TicTacToe implements BoardGame {
     int player = inputCount % 2 == 1 ? 1 : 2;
     someoneWin = isSomeoneWin(ticTacToeBoard.getBoard(), player);
 
-    // TODO 盤面の列から勝敗を判断する処理を追加
-    Stream.of(ticTacToeBoard.getBoard())
-        .map(line -> line[0])
-        .collect(Collectors.toList()); // 1列目だけ取得
-
-    Stream.of(ticTacToeBoard.getBoard())
-        .map(line -> line[1])
-        .collect(Collectors.toList()); // 2列目だけ取得
-
-    Stream.of(ticTacToeBoard.getBoard())
-        .map(line -> line[2])
-        .collect(Collectors.toList()); // 3列目だけ取得
-
-    Stream.of(ticTacToeBoard.getBoard()) // 取得した列を配列にまとめる
-        .map(line -> Stream.of(line).map(row -> row[0]).collect(Collectors.toList())
-            , Stream.of(line).map(row -> row[1]).collect(Collectors.toList())
-            , Stream.of(line).map(row -> row[2]).collect(Collectors.toList()))
-        .collect(Collectors.toList());
+    // 三目並べのボードに転置処理を行う
+    int[][] transposedBoard = new int[ticTacToeBoard.getColumnSize()][ticTacToeBoard.getLineSize()];
+    for (int i = 0; i < ticTacToeBoard.getLineSize(); i++) {
+      for (int j = 0; j < ticTacToeBoard.getColumnSize(); j++) {
+        transposedBoard[i][j] = ticTacToeBoard.getCellData(j, i);
+      }
+    }
+    someoneWin = someoneWin || isSomeoneWin(transposedBoard, player);
 
     // TODO 盤面の斜線から勝敗を判断する処理を追加
 
