@@ -1,3 +1,3 @@
 public interface BoardGame {
-  Result inputPlayerAttack();
+  Result inputPlayerAttack(int line, int column);
 }
