@@ -35,8 +35,22 @@ public class TicTacToe implements BoardGame {
     if (!someoneWin) {
       someoneWin = hasMatchColumn(player);
     }
-
-    // TODO 盤面の斜線から勝敗を判断する処理を追加
+    
+    if (!someoneWin) {
+      // 斜めの並びを配列で取得する
+      int[][] variationBoard = new int[(ticTacToeBoard.getLineSize() - 2) * (ticTacToeBoard.getColumnSize() - 2)][3];
+      int count = 0;
+      for (int i = 0; i <= ticTacToeBoard.getLineSize() - 3; i++) {
+        for (int j = 0; j <= ticTacToeBoard.getColumnSize() - 3; j++) {
+          for (int k = 0; k < 3; k++) {
+            variationBoard[count][k] = ticTacToeBoard.getCellData(i + k, j + k);
+          }
+          count++;
+        }
+      }
+      // 一致しているかどうかの判断を行う
+      someoneWin = hasMatchLine(variationBoard, player);
+    }
 
     return new Result(!someoneWin && inputCount < ticTacToeBoard.getLineSize() * ticTacToeBoard.getColumnSize()
         , someoneWin && inputCount % 2 == 1
