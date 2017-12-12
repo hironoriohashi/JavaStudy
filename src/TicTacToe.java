@@ -1,6 +1,4 @@
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class TicTacToe implements BoardGame {
@@ -32,17 +30,10 @@ public class TicTacToe implements BoardGame {
     boolean someoneWin;
     // TODO 盤面の状態から勝者を取得できるように修正
     int player = inputCount % 2 == 1 ? 1 : 2;
-    someoneWin = isSomeoneWin(ticTacToeBoard.getBoard(), player);
+    someoneWin = hasMatchLine(ticTacToeBoard.getBoard(), player);
 
-    // 三目並べのボードに転置処理を行う
     if (!someoneWin) {
-      int[][] transposedBoard = new int[ticTacToeBoard.getColumnSize()][ticTacToeBoard.getLineSize()];
-      for (int i = 0; i < ticTacToeBoard.getLineSize(); i++) {
-        for (int j = 0; j < ticTacToeBoard.getColumnSize(); j++) {
-          transposedBoard[i][j] = ticTacToeBoard.getCellData(j, i);
-        }
-      }
-      someoneWin = isSomeoneWin(transposedBoard, player);
+      someoneWin = hasMatchColumn(player);
     }
 
     // TODO 盤面の斜線から勝敗を判断する処理を追加
@@ -52,7 +43,18 @@ public class TicTacToe implements BoardGame {
         , someoneWin && inputCount % 2 == 0);
   }
 
-  private boolean isSomeoneWin(int[][] board, int player) {
+  private boolean hasMatchColumn(int player) {
+    int[][] transposedBoard = new int[ticTacToeBoard.getColumnSize()][ticTacToeBoard.getLineSize()];
+    // 三目並べのボードに転置処理を行う
+    for (int i = 0; i < ticTacToeBoard.getLineSize(); i++) {
+      for (int j = 0; j < ticTacToeBoard.getColumnSize(); j++) {
+        transposedBoard[i][j] = ticTacToeBoard.getCellData(j, i);
+      }
+    }
+    return hasMatchLine(transposedBoard, player);
+  }
+
+  private boolean hasMatchLine(int[][] board, int player) {
     return Stream.of(board)
         .anyMatch(line -> Arrays.stream(line).allMatch(cell -> cell == player));
   }
