@@ -33,26 +33,18 @@ public class TicTacToe implements BoardGame {
     // TODO 盤面の状態から勝者を取得できるように修正
     int player = inputCount % 2 == 1 ? 1 : 2;
     someoneWin = isSomeoneWin(ticTacToeBoard.getBoard(), player);
-    if (someoneWin) {
-      return new Result(!someoneWin && inputCount < ticTacToeBoard.getLineSize() * ticTacToeBoard.getColumnSize()
-          , someoneWin && inputCount % 2 == 1
-          , someoneWin && inputCount % 2 == 0);
-    }
 
     // 三目並べのボードに転置処理を行う
-    int[][] transposedBoard = new int[ticTacToeBoard.getColumnSize()][ticTacToeBoard.getLineSize()];
-    for (int i = 0; i < ticTacToeBoard.getLineSize(); i++) {
-      for (int j = 0; j < ticTacToeBoard.getColumnSize(); j++) {
-        transposedBoard[i][j] = ticTacToeBoard.getCellData(j, i);
+    if (!someoneWin) {
+      int[][] transposedBoard = new int[ticTacToeBoard.getColumnSize()][ticTacToeBoard.getLineSize()];
+      for (int i = 0; i < ticTacToeBoard.getLineSize(); i++) {
+        for (int j = 0; j < ticTacToeBoard.getColumnSize(); j++) {
+          transposedBoard[i][j] = ticTacToeBoard.getCellData(j, i);
+        }
       }
+      someoneWin = isSomeoneWin(transposedBoard, player);
     }
-    someoneWin = isSomeoneWin(transposedBoard, player);
-    if (someoneWin) {
-      return new Result(!someoneWin && inputCount < ticTacToeBoard.getLineSize() * ticTacToeBoard.getColumnSize()
-          , someoneWin && inputCount % 2 == 1
-          , someoneWin && inputCount % 2 == 0);
-    }
-    
+
     // TODO 盤面の斜線から勝敗を判断する処理を追加
 
     return new Result(!someoneWin && inputCount < ticTacToeBoard.getLineSize() * ticTacToeBoard.getColumnSize()
