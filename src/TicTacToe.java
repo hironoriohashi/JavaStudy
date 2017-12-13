@@ -37,9 +37,10 @@ public class TicTacToe implements BoardGame {
     }
 
     if (!someoneWin) {
-      int[][] diagonalCells = new int[1][3];
+      int[][] diagonalCells = new int[2][3];
       for (int i = 0; i < ticTacToeBoard.getLineSize(); i++) {
         diagonalCells[0][i] = ticTacToeBoard.getCellData(i, i);
+        diagonalCells[1][i] = ticTacToeBoard.getCellData(i, ticTacToeBoard.getColumnSize() - (i + 1));
       }
       someoneWin = hasMatchLine(diagonalCells, player);
     }
