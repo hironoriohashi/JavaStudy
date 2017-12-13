@@ -59,6 +59,17 @@ class TicTacToeTest {
     assertTrue(result.isFirstPlayerWin());
   }
 
+  @Test
+  public void 先手が5手目で右肩上がりの斜めを揃えて勝利条件を満たした場合に先手の勝利でゲームを終了すること() {
+    assertTrue(game.inputPlayerAttack(1, 3).isContinued());
+    assertTrue(game.inputPlayerAttack(1, 2).isContinued());
+    assertTrue(game.inputPlayerAttack(2, 2).isContinued());
+    assertTrue(game.inputPlayerAttack(2, 1).isContinued());
+    Result result = game.inputPlayerAttack(3, 1);
+    assertFalse(result.isContinued());
+    assertTrue(result.isFirstPlayerWin());
+  }
+
   /*
   @Test
   public void 先手が9手目で勝利条件を満たした場合に先手の勝利でゲームを終了すること() {
