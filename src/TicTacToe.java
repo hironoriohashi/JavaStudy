@@ -37,13 +37,11 @@ public class TicTacToe implements BoardGame {
     }
 
     if (!someoneWin) {
-      int matchCount = 0;
+      int[][] variationBoard = new int[1][3];
       for (int i = 0; i < ticTacToeBoard.getLineSize(); i++) {
-        if(ticTacToeBoard.getCellData(i, i) == player) {
-          matchCount++;
-        }
+        variationBoard[0][i] = ticTacToeBoard.getCellData(i, i);
       }
-      someoneWin = matchCount == 3;
+      someoneWin = hasMatchLine(variationBoard, player);
     }
 
     return new Result(!someoneWin && inputCount < ticTacToeBoard.getLineSize() * ticTacToeBoard.getColumnSize()
