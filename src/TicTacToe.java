@@ -37,17 +37,22 @@ public class TicTacToe implements BoardGame {
     }
 
     if (!someoneWin) {
-      int[][] diagonalCells = new int[2][3];
-      for (int i = 0; i < ticTacToeBoard.getLineSize(); i++) {
-        diagonalCells[0][i] = ticTacToeBoard.getCellData(i, i);
-        diagonalCells[1][i] = ticTacToeBoard.getCellData(i, ticTacToeBoard.getColumnSize() - (i + 1));
-      }
-      someoneWin = hasMatchLine(diagonalCells, player);
+      someoneWin = hasMatchDiagonal(player);
     }
 
     return new Result(!someoneWin && inputCount < ticTacToeBoard.getLineSize() * ticTacToeBoard.getColumnSize()
         , someoneWin && inputCount % 2 == 1
         , someoneWin && inputCount % 2 == 0);
+  }
+
+  private boolean hasMatchDiagonal(int player) {
+    int[][] diagonalCells = new int[2][3];
+    // 斜線の値を取得する
+    for (int i = 0; i < ticTacToeBoard.getLineSize(); i++) {
+      diagonalCells[0][i] = ticTacToeBoard.getCellData(i, i);
+      diagonalCells[1][i] = ticTacToeBoard.getCellData(i, ticTacToeBoard.getColumnSize() - (i + 1));
+    }
+    return hasMatchLine(diagonalCells, player);
   }
 
   private boolean hasMatchColumn(int player) {
