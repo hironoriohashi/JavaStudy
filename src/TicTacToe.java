@@ -30,24 +30,21 @@ public class TicTacToe implements BoardGame {
     boolean someoneWin;
     // TODO 盤面の状態から勝者を取得できるように修正
     int player = inputCount % 2 == 1 ? 1 : 2;
-    someoneWin = hasMatchLine(ticTacToeBoard.getBoard(), player);
-
-    if (!someoneWin) {
-      someoneWin = hasMatchColumn(player);
-    }
-
-    if (!someoneWin) {
-      int[][] diagonalCells = new int[2][3];
-      for (int i = 0; i < ticTacToeBoard.getLineSize(); i++) {
-        diagonalCells[0][i] = ticTacToeBoard.getCellData(i, i);
-        diagonalCells[1][i] = ticTacToeBoard.getCellData(i, ticTacToeBoard.getColumnSize() - (i + 1));
-      }
-      someoneWin = hasMatchLine(diagonalCells, player);
-    }
+    someoneWin = hasMatchLine(player) || hasMatchColumn(player) || hasMatchDiagonal(player);
 
     return new Result(!someoneWin && inputCount < ticTacToeBoard.getLineSize() * ticTacToeBoard.getColumnSize()
         , someoneWin && inputCount % 2 == 1
         , someoneWin && inputCount % 2 == 0);
+  }
+
+  private boolean hasMatchDiagonal(int player) {
+    int[][] diagonalCells = new int[2][3];
+    // 斜線の値を取得する
+    for (int i = 0; i < ticTacToeBoard.getLineSize(); i++) {
+      diagonalCells[0][i] = ticTacToeBoard.getCellData(i, i);
+      diagonalCells[1][i] = ticTacToeBoard.getCellData(i, ticTacToeBoard.getColumnSize() - (i + 1));
+    }
+    return hasComplete(diagonalCells, player);
   }
 
   private boolean hasMatchColumn(int player) {
@@ -58,10 +55,14 @@ public class TicTacToe implements BoardGame {
         transposedBoard[i][j] = ticTacToeBoard.getCellData(j, i);
       }
     }
-    return hasMatchLine(transposedBoard, player);
+    return hasComplete(transposedBoard, player);
   }
 
-  private boolean hasMatchLine(int[][] board, int player) {
+  private boolean hasMatchLine(int player) {
+    return hasComplete(ticTacToeBoard.getBoard(), player);
+  }
+
+  private boolean hasComplete(int[][] board, int player) {
     return Stream.of(board)
         .anyMatch(line -> Arrays.stream(line).allMatch(cell -> cell == player));
   }
