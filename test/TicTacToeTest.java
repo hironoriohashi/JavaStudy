@@ -1,5 +1,6 @@
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -79,38 +80,6 @@ class TicTacToeTest {
     });
   }
 
-
-  /*
-  @Test
-  public void 先手が9手目で勝利条件を満たした場合に先手の勝利でゲームを終了すること() {
-    assertTrue(game.inputPlayerAttack(1, 1).isContinued());
-    assertTrue(game.inputPlayerAttack(1, 2).isContinued());
-    assertTrue(game.inputPlayerAttack(1, 3).isContinued());
-    assertTrue(game.inputPlayerAttack(2, 1).isContinued());
-    assertTrue(game.inputPlayerAttack(2, 2).isContinued());
-    assertTrue(game.inputPlayerAttack(2, 3).isContinued());
-    assertTrue(game.inputPlayerAttack(3, 2).isContinued());
-    assertTrue(game.inputPlayerAttack(3, 3).isContinued());
-    Result result = game.inputPlayerAttack(3, 1);
-    assertFalse(result.isContinued());
-    assertTrue(result.isFirstPlayerWin());
-  }
-
-  @Test
-  public void 先手が9手目で勝利条件を満たさなかった場合に引き分けでゲームを終了すること() {
-    assertTrue(game.inputPlayerAttack(1, 1).isContinued());
-    assertTrue(game.inputPlayerAttack(1, 2).isContinued());
-    assertTrue(game.inputPlayerAttack(1, 3).isContinued());
-    assertTrue(game.inputPlayerAttack(2, 2).isContinued());
-    assertTrue(game.inputPlayerAttack(2, 1).isContinued());
-    assertTrue(game.inputPlayerAttack(2, 3).isContinued());
-    assertTrue(game.inputPlayerAttack(3, 2).isContinued());
-    assertTrue(game.inputPlayerAttack(3, 1).isContinued());
-    Result result = game.inputPlayerAttack(3, 3);
-    assertFalse(result.isContinued());
-    assertTrue(result.isDraw());
-  }
-
   @Test
   public void 指定した行の値が1以上3以下ではなかった場合にIllegalArgumentExceptionが投げられること() {
     assertThrows(IllegalArgumentException.class, () -> {
@@ -137,5 +106,4 @@ class TicTacToeTest {
       game.inputPlayerAttack(2, 3);
     });
   }
-  */
 }
