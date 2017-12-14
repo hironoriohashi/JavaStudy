@@ -13,8 +13,8 @@ public class TicTacToeBoard {
     board = new int[lineSize][columnSize];
   }
 
-  public void setCellData(int line, int column, int data) {
-    board[line][column] = data;
+  public void setCell(int line, int column, int player) {
+    board[line][column] = player;
   }
 
   public int getLineSize() {
