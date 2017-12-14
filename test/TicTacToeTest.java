@@ -70,6 +70,15 @@ class TicTacToeTest {
     assertTrue(result.isFirstPlayerWin());
   }
 
+  @Test void 既に変更が加えられた座標を次の手に指定した場合にIllegalArgumentExceptionが投げられること() {
+    game.inputPlayerAttack(1, 1);
+
+    assertThrows(IllegalArgumentException.class, () -> {
+      game.inputPlayerAttack(1, 1);
+    });
+  }
+
+
   /*
   @Test
   public void 先手が9手目で勝利条件を満たした場合に先手の勝利でゲームを終了すること() {
@@ -125,14 +134,6 @@ class TicTacToeTest {
 
     assertThrows(IllegalArgumentException.class, () -> {
       game.inputPlayerAttack(2, 3);
-    });
-  }
-
-  @Test void 既に変更が加えられた座標を次の手に指定した場合にIllegalArgumentExceptionが投げられること() {
-    game.inputPlayerAttack(1, 1);
-
-    assertThrows(IllegalArgumentException.class, () -> {
-      game.inputPlayerAttack(1, 1);
     });
   }
   */
