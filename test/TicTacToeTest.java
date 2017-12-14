@@ -70,7 +70,8 @@ class TicTacToeTest {
     assertTrue(result.isFirstPlayerWin());
   }
 
-  @Test void 既に変更が加えられた座標を次の手に指定した場合にIllegalArgumentExceptionが投げられること() {
+  @Test
+  void 既に変更が加えられた座標を次の手に指定した場合にIllegalArgumentExceptionが投げられること() {
     game.inputPlayerAttack(1, 1);
 
     assertThrows(IllegalArgumentException.class, () -> {
