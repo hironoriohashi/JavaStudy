@@ -1,6 +1,6 @@
 
 public class TicTacToe implements BoardGame {
-  private TicTacToeBoard ticTacToeBoard;
+  private TicTacToeBoard board;
   private int inputCount;
 
   /**
@@ -9,7 +9,7 @@ public class TicTacToe implements BoardGame {
    * 入力されたデータをカウントするフィールドを0にする
    */
   public TicTacToe() {
-    ticTacToeBoard = new TicTacToeBoard(3, 3);
+    board = new TicTacToeBoard(3, 3);
     inputCount = 0;
   }
 
@@ -28,9 +28,9 @@ public class TicTacToe implements BoardGame {
     boolean someoneWin;
     // TODO 盤面の状態から勝者を取得できるように修正
     int player = inputCount % 2 == 1 ? 1 : 2;
-    someoneWin = ticTacToeBoard.hasMatchLine(player) || ticTacToeBoard.hasMatchColumn(player) || ticTacToeBoard.hasMatchDiagonal(player);
+    someoneWin = board.hasMatchLine(player) || board.hasMatchColumn(player) || board.hasMatchDiagonal(player);
 
-    return new Result(!someoneWin && inputCount < ticTacToeBoard.getLineSize() * ticTacToeBoard.getColumnSize()
+    return new Result(!someoneWin && inputCount < board.getLineSize() * board.getColumnSize()
         , someoneWin && inputCount % 2 == 1
         , someoneWin && inputCount % 2 == 0);
   }
@@ -41,7 +41,7 @@ public class TicTacToe implements BoardGame {
    * @param y 指定した列
    */
   private void inputCellData(int x, int y) {
-    ticTacToeBoard.setCellData(x - 1, y - 1, inputCount % 2 == 0 ? 1 : 2);
+    board.setCellData(x - 1, y - 1, inputCount % 2 == 0 ? 1 : 2);
     inputCount++;
   }
 }
