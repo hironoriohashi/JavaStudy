@@ -36,23 +36,6 @@ public class TicTacToe implements BoardGame {
   }
 
   /**
-   * 指定された行と列の交点にデータを入力できるかどうかの判断を行う
-   * @param x データを入力する行
-   * @param y データを入力する列
-   * @return データの入力ができるかどうか
-   */
-  private boolean canInputData(int x, int y) {
-    if (inputCount >= ticTacToeBoard.getLineSize() * ticTacToeBoard.getColumnSize()) {
-      return false;
-    } else if (x < 1 || x > ticTacToeBoard.getLineSize() || y < 1 || y > ticTacToeBoard.getColumnSize()) {
-      return false;
-    } else if (ticTacToeBoard.getCellData(x - 1, y - 1) != 0) {
-      return false;
-    }
-    return true;
-  }
-
-  /**
    * ボードの指定した行と列の交点に値を入力する
    * @param x 指定した行
    * @param y 指定した列

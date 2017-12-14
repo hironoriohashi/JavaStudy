@@ -25,14 +25,6 @@ public class TicTacToeBoard {
     return columnSize;
   }
 
-  public int getCellData(int line, int column) {
-    return board[line][column];
-  }
-
-  public int[][] getBoard() {
-    return board;
-  }
-
   public boolean hasMatchDiagonal(int player) {
     int[][] diagonalCells = new int[2][3];
     // 斜線の値を取得する
