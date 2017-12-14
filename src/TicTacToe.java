@@ -23,7 +23,7 @@ public class TicTacToe implements BoardGame {
   @Override
   public Result inputPlayerAttack(int x, int y) {
 
-    inputCellData(x, y);
+    inputCell(x, y);
 
     boolean someoneWin;
     // TODO 盤面の状態から勝者を取得できるように修正
@@ -40,8 +40,8 @@ public class TicTacToe implements BoardGame {
    * @param x 指定した行
    * @param y 指定した列
    */
-  private void inputCellData(int x, int y) {
-    board.setCellData(x - 1, y - 1, inputCount % 2 == 0 ? 1 : 2);
+  private void inputCell(int x, int y) {
+    board.setCell(x - 1, y - 1, inputCount % 2 == 0 ? 1 : 2);
     inputCount++;
   }
 }
