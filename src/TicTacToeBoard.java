@@ -14,6 +14,12 @@ public class TicTacToeBoard {
   }
 
   public void setCell(int x, int y, int player) {
+    if (x < 0 || x >= lineSize || y < 0 || y >= columnSize) {
+      throw new IllegalArgumentException();
+    }
+    if (board[x][y] != 0) {
+      throw new IllegalArgumentException();
+    }
     board[x][y] = player;
   }
 

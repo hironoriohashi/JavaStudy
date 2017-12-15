@@ -22,17 +22,24 @@ public class TicTacToe implements BoardGame {
    */
   @Override
   public Result inputPlayerAttack(int x, int y) {
-
+    int beforePlayer = getLastAttackPlayer();
+    if (board.hasMatchLine(beforePlayer) || board.hasMatchColumn(beforePlayer) || board.hasMatchDiagonal(beforePlayer)) {
+      throw new IllegalArgumentException();
+    }
     inputCell(x, y);
 
     boolean someoneWin;
     // TODO 盤面の状態から勝者を取得できるように修正
-    int player = inputCount % 2 == 1 ? 1 : 2;
+    int player = getLastAttackPlayer();
     someoneWin = board.hasMatchLine(player) || board.hasMatchColumn(player) || board.hasMatchDiagonal(player);
 
     return new Result(!someoneWin && inputCount < board.getLineSize() * board.getColumnSize()
         , someoneWin && inputCount % 2 == 1
         , someoneWin && inputCount % 2 == 0);
+  }
+
+  private int getLastAttackPlayer() {
+    return inputCount % 2 == 1 ? 1 : 2;
   }
 
   /**
