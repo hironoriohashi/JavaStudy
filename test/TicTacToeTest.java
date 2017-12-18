@@ -102,7 +102,7 @@ class TicTacToeTest {
     game.inputPlayerAttack(2, 2);
     game.inputPlayerAttack(1, 3);
 
-    assertThrows(IllegalArgumentException.class, () -> {
+    assertThrows(IllegalStateException.class, () -> {
       game.inputPlayerAttack(2, 3);
     });
   }
