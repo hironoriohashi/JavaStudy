@@ -15,10 +15,10 @@ public class TicTacToeBoard {
 
   public void setCell(int x, int y, int player) {
     if (x < 0 || x >= lineSize || y < 0 || y >= columnSize) {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("指定した座標は不正です");
     }
     if (board[x][y] != 0) {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("指定した座標には既に入力があります");
     }
     board[x][y] = player;
   }

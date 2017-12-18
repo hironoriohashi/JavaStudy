@@ -24,7 +24,7 @@ public class TicTacToe implements BoardGame {
   public Result inputPlayerAttack(int x, int y) {
     int beforePlayer = getLastAttackPlayer();
     if (board.hasMatchLine(beforePlayer) || board.hasMatchColumn(beforePlayer) || board.hasMatchDiagonal(beforePlayer)) {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("ゲームは終了しました");
     }
     inputCell(x, y);
 
