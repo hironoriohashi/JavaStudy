@@ -1,5 +1,6 @@
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -70,35 +71,13 @@ class TicTacToeTest {
     assertTrue(result.isFirstPlayerWin());
   }
 
-  /*
   @Test
-  public void 先手が9手目で勝利条件を満たした場合に先手の勝利でゲームを終了すること() {
-    assertTrue(game.inputPlayerAttack(1, 1).isContinued());
-    assertTrue(game.inputPlayerAttack(1, 2).isContinued());
-    assertTrue(game.inputPlayerAttack(1, 3).isContinued());
-    assertTrue(game.inputPlayerAttack(2, 1).isContinued());
-    assertTrue(game.inputPlayerAttack(2, 2).isContinued());
-    assertTrue(game.inputPlayerAttack(2, 3).isContinued());
-    assertTrue(game.inputPlayerAttack(3, 2).isContinued());
-    assertTrue(game.inputPlayerAttack(3, 3).isContinued());
-    Result result = game.inputPlayerAttack(3, 1);
-    assertFalse(result.isContinued());
-    assertTrue(result.isFirstPlayerWin());
-  }
+  void 既に変更が加えられた座標を次の手に指定した場合にIllegalArgumentExceptionが投げられること() {
+    game.inputPlayerAttack(1, 1);
 
-  @Test
-  public void 先手が9手目で勝利条件を満たさなかった場合に引き分けでゲームを終了すること() {
-    assertTrue(game.inputPlayerAttack(1, 1).isContinued());
-    assertTrue(game.inputPlayerAttack(1, 2).isContinued());
-    assertTrue(game.inputPlayerAttack(1, 3).isContinued());
-    assertTrue(game.inputPlayerAttack(2, 2).isContinued());
-    assertTrue(game.inputPlayerAttack(2, 1).isContinued());
-    assertTrue(game.inputPlayerAttack(2, 3).isContinued());
-    assertTrue(game.inputPlayerAttack(3, 2).isContinued());
-    assertTrue(game.inputPlayerAttack(3, 1).isContinued());
-    Result result = game.inputPlayerAttack(3, 3);
-    assertFalse(result.isContinued());
-    assertTrue(result.isDraw());
+    assertThrows(IllegalArgumentException.class, () -> {
+      game.inputPlayerAttack(1, 1);
+    });
   }
 
   @Test
@@ -123,17 +102,8 @@ class TicTacToeTest {
     game.inputPlayerAttack(2, 2);
     game.inputPlayerAttack(1, 3);
 
-    assertThrows(IllegalArgumentException.class, () -> {
+    assertThrows(IllegalStateException.class, () -> {
       game.inputPlayerAttack(2, 3);
     });
   }
-
-  @Test void 既に変更が加えられた座標を次の手に指定した場合にIllegalArgumentExceptionが投げられること() {
-    game.inputPlayerAttack(1, 1);
-
-    assertThrows(IllegalArgumentException.class, () -> {
-      game.inputPlayerAttack(1, 1);
-    });
-  }
-  */
 }
